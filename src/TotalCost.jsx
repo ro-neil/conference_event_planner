@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./TotalCost.css";
+import Currency from "./Currency";
 
 const TotalCost = ({ totalCosts, ItemsDisplay }) => {
     const costValues = Object.values(totalCosts);
@@ -12,7 +13,9 @@ const TotalCost = ({ totalCosts, ItemsDisplay }) => {
                     <p className="preheading"><h3>Total cost for the event</h3></p>
                 </div>
                 <div>
-                    <h2 id="pre_fee_cost_display" className="price">${total_amount}</h2>
+                    <h2 id="pre_fee_cost_display" className="price">
+                        <Currency figure={total_amount} />
+                    </h2>
                     <div className="render_items">
                         <ItemsDisplay />
                     </div>
