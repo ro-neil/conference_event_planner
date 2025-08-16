@@ -265,6 +265,7 @@
   }
   .nav_links{
     display: flex;
+    align-items: center;
     gap: 170px;
   }
   .left_navbar{
@@ -279,6 +280,7 @@
     margin-right: 20px;
     transition: all 0.3s ease;
     font-size: 25px;
+    text-wrap: nowrap;
   }
   
   .nav_links a:hover {

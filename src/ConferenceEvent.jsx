@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./ConferenceEvent.css";
 import TotalCost from "./TotalCost";
+import Currency from "./Currency";
 import { useSelector, useDispatch } from "react-redux";
 import { incrementQuantity, decrementQuantity } from "./venueSlice";
 import { incrementAvQuantity, decrementAvQuantity } from "./avSlice";
@@ -92,7 +93,9 @@ const ConferenceEvent = () => {
                     {items.map((item, index) => (
                         <tr key={index}>
                             <td>{item.name}</td>
-                            <td>${item.cost}</td>
+                            <td>
+                                <Currency figure={item.cost} />
+                            </td>
                             <td>
                                 {item.type === "meals" || item.numberOfPeople
                                 ? ` For ${numberOfPeople} people`
@@ -100,8 +103,9 @@ const ConferenceEvent = () => {
                             </td>
                             <td>
                                 {item.type === "meals" || item.numberOfPeople
-                                ? `${item.cost * numberOfPeople}`
-                                : `${item.cost * item.quantity}`}
+                                ? <Currency figure={item.cost * numberOfPeople} />
+                                : <Currency figure={item.cost * item.quantity} />
+                                }
                             </td>
                         </tr>
                     ))}
@@ -188,10 +192,11 @@ const ConferenceEvent = () => {
                                 <img src={item.img} alt={item.name} />
                             </div>
                             <div className="text">{item.name}</div>
-                            <div>${item.cost}</div>
+                            <div>
+                                <Currency figure={item.cost} />
+                            </div>
                     <div className="button_container">
                         {venueItems[index].name === "Auditorium Hall (Capacity:200)" ? (
-
                         <>
                         <button
                             className={venueItems[index].quantity === 0 ? "btn-warning btn-disabled" : "btn-minus btn-warning"}
@@ -234,7 +239,9 @@ const ConferenceEvent = () => {
                             </div>
                         ))}
                         </div>
-                        <div className="total_cost">Total Cost: ${venueTotalCost}</div>
+                        <div className="total_cost">
+                            Total Cost: <Currency figure={venueTotalCost} />
+                        </div>
                     </div>
 
                     {/*Necessary Add-ons*/}
@@ -253,16 +260,20 @@ const ConferenceEvent = () => {
                                     <img src={item.img} alt={item.name} />
                                 </div>
                             <div className="text"> {item.name} </div>
-                            <div> ${item.cost} </div>
-                                <div className="addons_btn">
-                                    <button className="btn-warning" onClick={() => handleDecrementAvQuantity(index)}> &ndash; </button>
-                                    <span className="quantity-value">{item.quantity}</span>
-                                    <button className=" btn-success" onClick={() => handleIncrementAvQuantity(index)}> &#43; </button>
-                                </div>
+                            <div>
+                                <Currency figure={item.cost} />
                             </div>
+                            <div className="addons_btn">
+                                <button className="btn-warning" onClick={() => handleDecrementAvQuantity(index)}> &ndash; </button>
+                                <span className="quantity-value">{item.quantity}</span>
+                                <button className=" btn-success" onClick={() => handleIncrementAvQuantity(index)}> &#43; </button>
+                            </div>
+                        </div>
                         ))}
                         </div>
-                        <div className="total_cost">Total Cost: {avTotalCost}</div>
+                        <div className="total_cost">
+                            Total Cost: <Currency figure={avTotalCost} />
+                        </div>
 
                     </div>
 
@@ -291,11 +302,15 @@ const ConferenceEvent = () => {
                                         />
                                         <label htmlFor={`meal_${index}`}> {item.name} </label>
                                     </div>
-                                    <div className="meal_cost">${item.cost}</div>
+                                    <div className="meal_cost">
+                                        <Currency figure={item.cost} />
+                                    </div>
                                 </div>
                             ))}
                         </div>
-                        <div className="total_cost">Total Cost: {mealsTotalCost}</div>
+                        <div className="total_cost">
+                            Total Cost: <Currency figure={mealsTotalCost} />
+                        </div>
 
 
                     </div>
